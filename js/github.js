@@ -37,8 +37,10 @@
     },
     'LEMON-Love-Predictor': {
       tagline: 'Predicting relationship status from the LEMON dataset — emotional, cognitive and behavioural traits run through interpretable ML with SHAP attribution.',
-      cover: 'https://raw.githubusercontent.com/samuel29102002/LEMON-Love-Predictor/main/shap_values.png',
+      cover: 'https://raw.githubusercontent.com/nicola1702/LEMON-Love-Predictor/main/shap_values.png',
       tags: ['causal', 'shap', 'classification', 'psychometrics'],
+      url: 'https://github.com/nicola1702/LEMON-Love-Predictor',
+      apiOwner: 'nicola1702',
       hasPdf: false
     }
   };
@@ -82,16 +84,21 @@
 
     /* Cover */
     const cover = el('div', 'project-cover');
+    function makePlaceholder() {
+      const ph = el('div', 'img-placeholder');
+      ph.innerHTML = '<span>[ screenshot: /assets/images/' + escapeHTML(repo.name) + '-preview.jpg ]</span>';
+      return ph;
+    }
     if (meta.cover) {
       const img = el('img');
       img.loading = 'lazy';
       img.width = 800; img.height = 450;
       img.alt = repo.name + ' preview';
       img.src = meta.cover;
-      img.onerror = () => { cover.innerHTML = '<div class="placeholder">' + escapeHTML(repo.language || 'CODE') + '</div>'; };
+      img.onerror = () => { cover.innerHTML = ''; cover.appendChild(makePlaceholder()); };
       cover.appendChild(img);
     } else {
-      cover.appendChild(el('div', 'placeholder', escapeHTML(repo.language || 'CODE')));
+      cover.appendChild(makePlaceholder());
     }
 
     /* Badges */
@@ -137,9 +144,9 @@
     tagPool.forEach(t => tags.appendChild(el('span', 'tag', '#' + escapeHTML(t))));
     if (tagPool.length) body.appendChild(tags);
 
-    /* Link */
+    /* Link — meta.url overrides for repos that live in another account (e.g., LEMON in nicola1702) */
     const link = el('a', 'project-link', 'View Repo');
-    link.href = repo.html_url || ('https://github.com/' + USER + '/' + repo.name);
+    link.href = meta.url || repo.html_url || ('https://github.com/' + (meta.apiOwner || USER) + '/' + repo.name);
     link.target = '_blank'; link.rel = 'noopener';
     body.appendChild(link);
 
@@ -165,21 +172,25 @@
 
   /* ---------- Fallback data when API fails ---------- */
   function fallbackRepos() {
-    return FEATURED.map(name => ({
-      name,
-      html_url: 'https://github.com/' + USER + '/' + name,
-      description: META[name] ? META[name].tagline : '',
-      language: ({
-        'orderflow-lab': 'Python',
-        'MLES_IMU': 'C',
-        'Continuous-Time-Derivatives-Pricing': 'Jupyter Notebook',
-        'Energy_Data_Science': 'Jupyter Notebook',
-        'LEMON-Love-Predictor': 'Jupyter Notebook'
-      })[name] || null,
-      stargazers_count: name === 'orderflow-lab' || name === 'Energy_Data_Science' || name === 'LEMON-Love-Predictor' ? 1 : 0,
-      topics: META[name] ? META[name].tags : [],
-      pushed_at: '2025-12-01T00:00:00Z'
-    }));
+    return FEATURED.map(name => {
+      const meta = META[name] || {};
+      const owner = meta.apiOwner || USER;
+      return {
+        name,
+        html_url: meta.url || ('https://github.com/' + owner + '/' + name),
+        description: meta.tagline || '',
+        language: ({
+          'orderflow-lab': 'Python',
+          'MLES_IMU': 'Python',
+          'Continuous-Time-Derivatives-Pricing': 'Jupyter Notebook',
+          'Energy_Data_Science': 'Jupyter Notebook',
+          'LEMON-Love-Predictor': 'Jupyter Notebook'
+        })[name] || null,
+        stargazers_count: name === 'orderflow-lab' || name === 'Energy_Data_Science' || name === 'LEMON-Love-Predictor' ? 1 : 0,
+        topics: meta.tags || [],
+        pushed_at: '2025-12-01T00:00:00Z'
+      };
+    });
   }
 
   /* ---------- Main ---------- */
@@ -205,11 +216,26 @@
       repos = fallbackRepos();
     }
 
-    /* Sort: featured first (in declared order), then rest by updated desc */
+    /* Sort: featured first (in declared order), then rest by updated desc.
+       For featured repos that live in a different account (META.apiOwner),
+       synthesise a stub from META so the card still appears. */
     const featuredRepos = [];
     FEATURED.forEach(name => {
       const r = repos.find(x => x.name === name);
-      if (r) featuredRepos.push(r);
+      if (r) {
+        featuredRepos.push(r);
+      } else if (META[name] && (META[name].url || META[name].apiOwner)) {
+        const meta = META[name];
+        featuredRepos.push({
+          name,
+          html_url: meta.url || ('https://github.com/' + (meta.apiOwner || USER) + '/' + name),
+          description: meta.tagline || '',
+          language: meta.fallbackLang || null,
+          stargazers_count: meta.stars || 0,
+          topics: meta.tags || [],
+          pushed_at: meta.pushed_at || '2025-12-01T00:00:00Z'
+        });
+      }
     });
     const others = repos
       .filter(r => !FEATURED.includes(r.name) && !r.fork && !r.archived && !r.private)

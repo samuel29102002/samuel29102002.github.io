@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hobbies · Samuel Heinrich</title>
-  <meta name="description" content="Piano, travel, fitness, indie game dev, and budget cooking — the parts of Samuel Heinrich's life that don't ship to a Git remote." />
-  <meta name="theme-color" content="#080808" />
+  <meta name="description" content="Piano, music, and travel — Samuel Heinrich." />
+  <meta name="theme-color" content="#0f0f0f" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Hobbies · Samuel Heinrich" />
-  <meta property="og:description" content="Piano · Travel · Fitness · Game dev · Budget cooking." />
+  <meta property="og:description" content="Piano · Music · Travel." />
   <meta property="og:image" content="https://raw.githubusercontent.com/samuel29102002/orderflow-lab/main/docs/screenshots/landing-hero.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,500&family=Syne:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animations.css" />
 </head>
@@ -35,19 +35,16 @@
     </div>
   </nav>
 
-  <!-- ============================================================
-       Intro
-       ============================================================ -->
   <section style="padding-top: calc(var(--s-9) + 4rem); padding-bottom: var(--s-7);">
     <div class="container">
-      <span class="eyebrow">Hobbies · 5 panels</span>
-      <h1 style="font-size: var(--fs-3xl); margin-bottom: var(--s-5);">Off the clock,<br/>still on the keyboard.</h1>
-      <p class="muted" style="font-size: var(--fs-lg); max-width: 60ch;">Scroll down — the section below pins and the panels move sideways. Five things I do when I'm not in a Jupyter notebook.</p>
+      <span class="eyebrow">Hobbies · 3 panels</span>
+      <h1 style="font-size: var(--fs-3xl); margin-bottom: var(--s-5);">Piano · Music · Travel.</h1>
+      <p class="muted" style="font-size: var(--fs-lg); max-width: 60ch;">The section below pins and the panels move sideways as you scroll.</p>
     </div>
   </section>
 
   <!-- ============================================================
-       Horizontal pinned scroll
+       Horizontal pinned scroll — 3 panels
        ============================================================ -->
   <div class="hobbies-wrap" style="overflow:hidden;">
     <div class="hobbies-track">
@@ -55,125 +52,72 @@
       <!-- 1 · Piano -->
       <section class="hobby-panel panel-piano">
         <div class="hobby-inner">
-          <div class="hobby-num">01 / 05 · Music</div>
-          <h2 class="hobby-title">Piano.<br/>Classical → Modern.</h2>
-          <p class="hobby-desc">Self-taught for the first few years, then proper lessons. Currently somewhere between a slow Chopin nocturne and a fast jazz turnaround. The instrument that taught me to be patient with my own hands.</p>
-          <div class="hobby-tags">
-            <span>· Chopin</span><span>· Bach</span><span>· Modern jazz</span><span>· 88 keys, no shortcuts</span>
-          </div>
+          <div class="hobby-num">01 / 03 · Piano</div>
+          <h2 class="hobby-title">Piano.</h2>
+          <ul class="hobby-list">
+            <li><span></span><span>Classical pianist, trained from childhood.</span></li>
+            <li><span></span><span>Competed in regional and national competitions.</span></li>
+            <li><span></span><span>Currently working through Chopin Ballades.</span></li>
+          </ul>
         </div>
         <div class="hobby-art">
-          <div class="center" style="height: 100%;">
-            <div class="piano-keys" aria-hidden="true">
-              <div class="piano-key"></div>
-              <div class="piano-key black"></div>
-              <div class="piano-key"></div>
-              <div class="piano-key black"></div>
-              <div class="piano-key"></div>
-              <div class="piano-key"></div>
-              <div class="piano-key black"></div>
-              <div class="piano-key"></div>
-              <div class="piano-key black"></div>
-              <div class="piano-key"></div>
-              <div class="piano-key black"></div>
-              <div class="piano-key"></div>
-              <div class="piano-key"></div>
-              <div class="piano-key black"></div>
-              <div class="piano-key"></div>
-            </div>
+          <div class="img-placeholder portrait" aria-label="Piano photo slot">
+            <span>[ add photo here:<br/>/assets/images/piano.jpg ]</span>
           </div>
         </div>
       </section>
 
-      <!-- 2 · Travel -->
+      <!-- 2 · Music & Performing Arts -->
+      <section class="hobby-panel panel-music">
+        <div class="hobby-inner">
+          <div class="hobby-num">02 / 03 · Music</div>
+          <h2 class="hobby-title">Music.</h2>
+          <ul class="hobby-list">
+            <li><span></span><span>Aurelius Sängerknaben Calw — boys' choir.</span></li>
+            <li><span></span><span>Performed at operas in Paris, Dresden, and Berlin (ages 10–13).</span></li>
+            <li><span></span><span>Viola, Landesjugendorchester Baden-Württemberg.</span></li>
+            <li><span></span><span>Viola, Donauphilharmonie.</span></li>
+          </ul>
+        </div>
+        <div class="hobby-art">
+          <div class="img-placeholder wide" aria-label="Music performance photo slot" style="aspect-ratio: 4 / 5;">
+            <span>[ add photo here:<br/>/assets/images/music-performance.jpg ]</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 · Travel -->
       <section class="hobby-panel panel-travel">
         <div class="hobby-inner">
-          <div class="hobby-num">02 / 05 · Travel</div>
-          <h2 class="hobby-title">Europe first.<br/>Goal: every country.</h2>
-          <p class="hobby-desc">Most recent stamp: Sardinia, April 2026 — pasta, granite cliffs, espresso priced like a rounding error. The list of remaining European countries is shorter than it sounds. The list of remaining European mountain passes is longer.</p>
-          <div class="hobby-tags">
-            <span>· Sardinia '26</span><span>· Berlin</span><span>· Rome</span><span>· Stockholm</span><span>· Athens</span><span>· Prague</span>
-          </div>
+          <div class="hobby-num">03 / 03 · Travel</div>
+          <h2 class="hobby-title">Travel.</h2>
+          <ul class="hobby-list">
+            <li><span></span><span>Sardinia, April 2026.</span></li>
+            <li><span></span><span>Georgia (country), July 2026 — planned.</span></li>
+            <li><span></span><span>6 months in Tallinn, Estonia.</span></li>
+            <li><span></span><span>6 months in Farmington CT, USA.</span></li>
+          </ul>
         </div>
         <div class="hobby-art">
-          <div class="world-dots" aria-hidden="true">
-            <span class="dot" style="top: 30%; left: 50%;"></span>
-            <span class="dot" style="top: 35%; left: 56%; animation-delay: 0.4s;"></span>
-            <span class="dot" style="top: 50%; left: 52%; animation-delay: 0.8s;"></span>
-            <span class="dot" style="top: 25%; left: 64%; animation-delay: 1.2s;"></span>
-            <span class="dot" style="top: 22%; left: 48%; animation-delay: 1.6s;"></span>
-            <span class="dot" style="top: 38%; left: 44%; animation-delay: 2.0s;"></span>
-            <span class="dot" style="top: 52%; left: 42%; animation-delay: 2.4s;"></span>
-            <span class="dot" style="top: 60%; left: 60%; animation-delay: 2.8s;"></span>
-            <span class="dot" style="top: 18%; left: 60%; animation-delay: 0.2s;"></span>
-          </div>
-        </div>
-      </section>
+          <div style="display:flex; flex-direction: column; align-items: center; gap: var(--s-4); width: 100%; max-width: 460px;">
+            <div class="world-dots" style="aspect-ratio: 16 / 10; width: 100%; background:
+                radial-gradient(ellipse at 52% 42%, rgba(212,168,67,0.06), transparent 60%);
+                border: 1px dashed var(--bg-muted); border-radius: var(--radius);">
+              <!-- approximate dots for the four locations -->
+              <span class="dot" style="top: 38%; left: 50%;" title="Sardinia"></span>
+              <span class="label" style="top: 38%; left: 50%; padding-left: 12px;">Sardinia</span>
 
-      <!-- 3 · Fitness -->
-      <section class="hobby-panel panel-fitness">
-        <div class="hobby-inner">
-          <div class="hobby-num">03 / 05 · Fitness</div>
-          <h2 class="hobby-title">Just started.<br/>Numbers coming.</h2>
-          <p class="hobby-desc">A fat-loss-and-endurance arc, started in 2026. Honest about the baseline, optimistic about the trajectory. Less about a six-pack, more about being able to outrun the 95% confidence interval of my future self.</p>
-          <div class="hobby-tags">
-            <span>· Running</span><span>· Strength base</span><span>· High-protein</span><span>· Patient</span>
-          </div>
-        </div>
-        <div class="hobby-art">
-          <div class="center" style="height: 100%;">
-            <div class="running-figure" aria-hidden="true"></div>
-          </div>
-        </div>
-      </section>
+              <span class="dot" style="top: 28%; left: 64%; animation-delay: 0.4s;" title="Tbilisi"></span>
+              <span class="label" style="top: 28%; left: 64%; padding-left: 12px;">Georgia</span>
 
-      <!-- 4 · Game dev -->
-      <section class="hobby-panel panel-game">
-        <div class="hobby-inner">
-          <div class="hobby-num">04 / 05 · Game dev</div>
-          <h2 class="hobby-title">Dice mechanics.<br/>HTML5 roguelikes.</h2>
-          <p class="hobby-desc">Loaded-dice systems, micro-roguelikes built in vanilla HTML5. Modding existing games when no design fits the itch. The closest thing I have to a creative outlet that doesn't pretend to be useful.</p>
-          <div class="hobby-tags">
-            <span>· HTML5</span><span>· Probability</span><span>· Roguelike</span><span>· Modding</span>
-          </div>
-        </div>
-        <div class="hobby-art">
-          <div class="center" style="height: 100%;">
-            <div class="terminal" aria-hidden="true">
-<span style="color:#22c55e;">&gt; loaded_dice.boot()</span>
-<br/>seed:    <span style="color:#d4a843;">0xDEADBEEF</span>
-<br/>floor:   <span style="color:#d4a843;">3</span>
-<br/>roll:    <span style="color:#d4a843;">[6 6 5 4 6]</span>
-<br/>luck:    <span style="color:#c0392b;">CURSED+1</span>
-<br/>hp:      <span style="color:#22c55e;">[████████  ] 80%</span>
-<br/>floor 4 unlocked<span class="blink">_</span>
+              <span class="dot" style="top: 18%; left: 56%; animation-delay: 0.8s;" title="Tallinn"></span>
+              <span class="label" style="top: 18%; left: 56%; padding-left: 12px;">Tallinn</span>
+
+              <span class="dot" style="top: 32%; left: 22%; animation-delay: 1.2s;" title="Farmington CT"></span>
+              <span class="label" style="top: 32%; left: 22%; padding-left: 12px;">Farmington CT</span>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5 · Cooking -->
-      <section class="hobby-panel panel-cooking">
-        <div class="hobby-inner">
-          <div class="hobby-num">05 / 05 · Cooking</div>
-          <h2 class="hobby-title">Budget. Creative.<br/>Surprisingly good.</h2>
-          <p class="hobby-desc">Meal prep on a strict cost-per-100g budget. Lentils, oats, eggs, frozen veg — and one weekly absurd ingredient that breaks the spreadsheet. The rule: if the macros and the receipt both line up, it's a recipe.</p>
-          <div class="hobby-tags">
-            <span>· Lentils</span><span>· Feta</span><span>· Oats</span><span>· Sheet-pan</span><span>· €/100g</span>
-          </div>
-        </div>
-        <div class="hobby-art">
-          <div class="center" style="height: 100%;">
-            <div class="kitchen-grid" aria-hidden="true">
-              <div class="item">Oats</div>
-              <div class="item">Lentils</div>
-              <div class="item">Eggs</div>
-              <div class="item">Feta</div>
-              <div class="item">Spinach</div>
-              <div class="item">Olive oil</div>
-              <div class="item">Onions</div>
-              <div class="item">Garlic</div>
-              <div class="item">Yogurt</div>
+            <div class="img-placeholder" style="width: 100%; aspect-ratio: 21 / 9;">
+              <span>[ add photo here: /assets/images/travel.jpg ]</span>
             </div>
           </div>
         </div>
@@ -182,17 +126,12 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       Closing
-       ============================================================ -->
   <section>
     <div class="container-narrow text-center reveal">
-      <span class="eyebrow">End of horizontal scroll</span>
-      <h2 style="font-size: var(--fs-2xl); margin-bottom: var(--s-5);">Five hobbies, one operating principle:<br/>finish the small things.</h2>
-      <p class="muted" style="font-size: var(--fs-lg); margin: 0 auto var(--s-6);">The piano piece, the run, the recipe, the prototype. Ten finished small things beat one unfinished big thing every time.</p>
+      <h2 style="font-size: var(--fs-xl); margin-bottom: var(--s-5);">More on the about page.</h2>
       <div class="hero-cta" style="justify-content: center;">
-        <a class="btn btn-primary" href="projects.html">See projects</a>
-        <a class="btn" href="contact.html">Say hi</a>
+        <a class="btn btn-primary" href="about.html">About</a>
+        <a class="btn" href="contact.html">Contact</a>
       </div>
     </div>
   </section>
@@ -200,8 +139,8 @@
   <footer class="footer">
     <div class="footer-inner">
       <span>© 2026 · Samuel Heinrich</span>
-      <span>Off-keyboard hours</span>
-      <span>Built with HTML · CSS · JS</span>
+      <span>Tübingen · Stuttgart</span>
+      <span>HTML · CSS · JS</span>
     </div>
   </footer>
 
