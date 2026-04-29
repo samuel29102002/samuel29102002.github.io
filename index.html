@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samuel Heinrich · Data Engineer / Quant Developer</title>
+  <meta name="description" content="Samuel Heinrich — Data Engineering & IT Governance at Schwarz Group. Quantitative finance, econometrics, machine learning. Stuttgart / Tübingen, Germany." />
+  <meta name="theme-color" content="#080808" />
+  <meta name="author" content="Samuel Heinrich" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Samuel Heinrich · Data Engineer / Quant Developer" />
+  <meta property="og:description" content="Data Engineering, quantitative finance, and machine learning. Stuttgart / Tübingen." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/samuel29102002/orderflow-lab/main/docs/screenshots/landing-hero.png" />
+  <meta property="og:url" content="https://samuel29102002.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       Navigation
+       ============================================================ -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><span class="dot"></span> Samuel Heinrich</a>
+      <button class="nav-burger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="hobbies.html">Hobbies</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       Hero
+       ============================================================ -->
+  <header class="hero">
+    <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+
+    <div class="container hero-inner">
+      <div class="hero-eyebrow">Stuttgart · Tübingen · DE</div>
+      <h1 class="hero-title">Samuel&nbsp;Heinrich</h1>
+      <div class="hero-subtitle"><span id="typewriter" data-words='["Data Engineer","Quant Developer","Builder","Econometrician","Engineer of quiet things"]'></span></div>
+      <div class="hero-meta mono">
+        <span>Born 29.10.2002</span>
+        <span class="sep">·</span>
+        <span>Data Engineering & IT Governance · Schwarz Group</span>
+        <span class="sep">·</span>
+        <span>EN / DE</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="projects.html">View Projects</a>
+        <a class="btn" href="https://github.com/samuel29102002" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="contact.html">Contact</a>
+      </div>
+    </div>
+
+    <a href="#about" class="hero-scroll" aria-label="Scroll">
+      <span>scroll</span>
+      <span class="chev"></span>
+    </a>
+  </header>
+
+  <!-- ============================================================
+       About preview
+       ============================================================ -->
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-num">01 · About</span>
+          <h2 class="section-title">Engineering for the things<br/>that don't tolerate noise.</h2>
+        </div>
+        <p class="section-sub">Compliance dashboards by day. Order books, derivatives and sensors by night. Same posture: precision, reproducibility, evidence.</p>
+      </div>
+
+      <div class="split">
+        <div class="bio-block reveal">
+          <p>I'm Samuel — born in Germany on the day quants discovered the volatility smile was not a smile at all. I work at the intersection of <em>data engineering</em>, <em>econometrics</em> and <em>quantitative finance</em>, with a soft spot for things that compute fast and break slowly.</p>
+          <p>By day I build governance and FTE-gap analytics for the Schwarz Group (Lidl · Kaufland · PreZero) — Google Apps Script, Python, openpyxl, and a Bloomberg-grade obsession with the last decimal.</p>
+          <p>By night I write Rust matching engines, price German Express certificates against Bundesbank Svensson curves, and run causal inference under the Rubin potential-outcomes framework. Then I cook on a budget.</p>
+        </div>
+
+        <ul class="kv-list reveal">
+          <li><span class="k">Role</span><span class="v">Data Engineering & IT Governance</span></li>
+          <li><span class="k">Org</span><span class="v">Schwarz Group · Lidl / Kaufland / PreZero</span></li>
+          <li><span class="k">Stack</span><span class="v">Python · GAS · SQL · Rust · R · LaTeX</span></li>
+          <li><span class="k">Domains</span><span class="v">Quant Finance · ML · Compliance · Energy</span></li>
+          <li><span class="k">Methods</span><span class="v">Rubin Causal Model · DeepLOB · Almgren-Chriss</span></li>
+          <li><span class="k">Languages</span><span class="v">German (native) · English (fluent)</span></li>
+          <li><span class="k">Location</span><span class="v">Stuttgart / Tübingen, Germany</span></li>
+          <li><span class="k">Status</span><span class="v"><span class="accent">●</span> Building. Open to ideas.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Skills
+       ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-num">02 · Skills</span>
+          <h2 class="section-title">Tools, opinionated.</h2>
+        </div>
+        <p class="section-sub">Self-rated. The bars are honest — the unmarked 30% is reserved for the things I haven't broken yet.</p>
+      </div>
+
+      <div class="split">
+        <div class="skills">
+          <div class="skill" data-pct="92"><span class="name">Python</span><div class="skill-bar"><span></span></div><span class="pct">92%</span></div>
+          <div class="skill" data-pct="88"><span class="name">SQL</span><div class="skill-bar"><span></span></div><span class="pct">88%</span></div>
+          <div class="skill" data-pct="85"><span class="name">Google Apps Script</span><div class="skill-bar"><span></span></div><span class="pct">85%</span></div>
+          <div class="skill" data-pct="80"><span class="name">JavaScript</span><div class="skill-bar"><span></span></div><span class="pct">80%</span></div>
+          <div class="skill" data-pct="78"><span class="name">openpyxl / pandas</span><div class="skill-bar"><span></span></div><span class="pct">78%</span></div>
+          <div class="skill" data-pct="74"><span class="name">R / Econometrics</span><div class="skill-bar"><span></span></div><span class="pct">74%</span></div>
+          <div class="skill" data-pct="70"><span class="name">LaTeX</span><div class="skill-bar"><span></span></div><span class="pct">70%</span></div>
+          <div class="skill" data-pct="62"><span class="name">Rust</span><div class="skill-bar"><span></span></div><span class="pct">62%</span></div>
+          <div class="skill" data-pct="58"><span class="name">PyTorch</span><div class="skill-bar"><span></span></div><span class="pct">58%</span></div>
+        </div>
+
+        <div>
+          <h3 style="margin-bottom: var(--s-5);">Domains</h3>
+          <div class="lang-grid">
+            <div class="lang-chip"><span class="lang-dot" style="background:#3b82f6"></span> Data Engineering</div>
+            <div class="lang-chip"><span class="lang-dot" style="background:#d4a843"></span> Quant Finance</div>
+            <div class="lang-chip"><span class="lang-dot" style="background:#22c55e"></span> Causal Inference</div>
+            <div class="lang-chip"><span class="lang-dot" style="background:#a855f7"></span> Machine Learning</div>
+            <div class="lang-chip"><span class="lang-dot" style="background:#c0392b"></span> Compliance Analytics</div>
+            <div class="lang-chip"><span class="lang-dot" style="background:#dea584"></span> Market Microstructure</div>
+            <div class="lang-chip"><span class="lang-dot" style="background:#198ce7"></span> Energy Data Science</div>
+            <div class="lang-chip"><span class="lang-dot" style="background:#f7df1e"></span> Web Engineering</div>
+          </div>
+
+          <h3 style="margin: var(--s-7) 0 var(--s-5);">Toolbox</h3>
+          <div class="lang-grid">
+            <div class="lang-chip">pandas</div>
+            <div class="lang-chip">openpyxl</div>
+            <div class="lang-chip">Chart.js</div>
+            <div class="lang-chip">PyTorch</div>
+            <div class="lang-chip">FastAPI</div>
+            <div class="lang-chip">PyO3 / maturin</div>
+            <div class="lang-chip">GitHub Actions</div>
+            <div class="lang-chip">Google Workspace</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Featured projects teaser
+       ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-num">03 · Selected work</span>
+          <h2 class="section-title">Things I've built recently.</h2>
+        </div>
+        <p class="section-sub">Live-fetched from GitHub. The full list, with screenshots and papers, is on the projects page.</p>
+      </div>
+
+      <div class="projects-grid" data-github-grid data-featured-only="true" data-limit="3"></div>
+
+      <div style="text-align:center; margin-top: var(--s-7);">
+        <a class="btn" href="projects.html">All projects <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA / closing
+       ============================================================ -->
+  <section class="section-tight">
+    <div class="container-narrow text-center reveal">
+      <span class="eyebrow">04 · Next</span>
+      <h2 style="font-size: var(--fs-2xl); margin-bottom: var(--s-5);">Always somewhere between a spreadsheet and a stochastic process.</h2>
+      <p class="muted" style="margin: 0 auto var(--s-6); font-size: var(--fs-lg);">If you're working on data engineering, quant tooling, governance analytics, or anything where the numbers actually have to add up — I'd love to hear about it.</p>
+      <div class="hero-cta" style="justify-content:center;">
+        <a class="btn btn-primary" href="contact.html">Get in touch</a>
+        <a class="btn" href="about.html">More about me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Footer
+       ============================================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 · Samuel Heinrich</span>
+      <span>Stuttgart · Tübingen · 48.7° N · 9.0° E</span>
+      <span>Built with HTML · CSS · JS</span>
+    </div>
+  </footer>
+
+  <!-- Vendor CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
+  <!-- App -->
+  <script src="js/three-scene.js" defer></script>
+  <script src="js/github.js" defer></script>
+  <script src="js/scroll.js" defer></script>
+  <script src="js/nav.js" defer></script>
+</body>
+</html>

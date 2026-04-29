@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Samuel Heinrich</title>
+  <meta name="description" content="Get in touch with Samuel Heinrich — email, GitHub, LinkedIn, Instagram." />
+  <meta name="theme-color" content="#080808" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contact · Samuel Heinrich" />
+  <meta property="og:description" content="Email, GitHub, LinkedIn, Instagram. Stuttgart / Tübingen." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/samuel29102002/orderflow-lab/main/docs/screenshots/landing-hero.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><span class="dot"></span> Samuel Heinrich</a>
+      <button class="nav-burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="hobbies.html">Hobbies</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       Hero
+       ============================================================ -->
+  <section style="padding-top: calc(var(--s-9) + 4rem);">
+    <div class="container">
+      <span class="eyebrow">Contact</span>
+      <h1 style="font-size: var(--fs-3xl); margin-bottom: var(--s-5);">Briefs · ideas ·<br/>quiet collaborations.</h1>
+      <p class="muted" style="font-size: var(--fs-lg); max-width: 60ch;">The fastest path to me is email. LinkedIn for formal things, Instagram if you want pictures of pasta and German rain. I read everything.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Channels
+       ============================================================ -->
+  <section style="padding-top: var(--s-7);">
+    <div class="container">
+      <div class="contact-grid stagger">
+
+        <a class="contact-card" href="mailto:samuelheinrich2002@gmail.com">
+          <span class="contact-label">Email · primary</span>
+          <span class="contact-value">samuelheinrich2002<br/>@gmail.com</span>
+          <span class="mono accent" style="font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; margin-top: var(--s-3);">→ Compose</span>
+        </a>
+
+        <a class="contact-card" href="https://github.com/samuel29102002" target="_blank" rel="noopener">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">@samuel29102002</span>
+          <span class="mono accent" style="font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; margin-top: var(--s-3);">→ Open profile</span>
+        </a>
+
+        <a class="contact-card" href="https://linkedin.com/in/samuel-heinrich-5b7145226/" target="_blank" rel="noopener">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">Samuel Heinrich</span>
+          <span class="mono accent" style="font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; margin-top: var(--s-3);">→ Connect</span>
+        </a>
+
+        <a class="contact-card" href="https://www.instagram.com/_samaezy_" target="_blank" rel="noopener">
+          <span class="contact-label">Instagram</span>
+          <span class="contact-value">@_samaezy_</span>
+          <span class="mono accent" style="font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; margin-top: var(--s-3);">→ Travel · life · food</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Mailto form
+       ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-num">01 · Quick note</span>
+          <h2 class="section-title">Or write something here.</h2>
+        </div>
+        <p class="section-sub">This form opens your default mail client with the message pre-filled — no server, no tracking, no third party.</p>
+      </div>
+
+      <form class="mail-form" id="mailto-form" novalidate>
+        <div>
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" placeholder="e.g. Anna Müller" autocomplete="name" />
+        </div>
+        <div>
+          <label for="f-subject">Subject</label>
+          <input id="f-subject" name="subject" type="text" placeholder="e.g. Quant tooling for our team" />
+        </div>
+        <div>
+          <label for="f-body">Message</label>
+          <textarea id="f-body" name="body" placeholder="Hi Samuel — ..."></textarea>
+        </div>
+        <div style="display:flex; gap: var(--s-3); flex-wrap: wrap;">
+          <button class="btn btn-primary" type="submit">Open mail client →</button>
+          <a class="btn" href="mailto:samuelheinrich2002@gmail.com">Plain mailto</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Closing
+       ============================================================ -->
+  <section class="section-tight">
+    <div class="container-narrow text-center reveal">
+      <span class="eyebrow">Response time</span>
+      <h2 style="font-size: var(--fs-xl); margin-bottom: var(--s-3);">Usually within 48 hours · German or English · math notation welcome.</h2>
+      <p class="muted">If it's about a paid brief, mention the timeline. If it's about a project of mine, the README is also a discussion starter — open an issue.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 · Samuel Heinrich</span>
+      <span>samuelheinrich2002@gmail.com</span>
+      <span>Built with HTML · CSS · JS</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+  <script src="js/scroll.js" defer></script>
+  <script src="js/nav.js" defer></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const f = document.getElementById('mailto-form');
+      if (!f) return;
+      f.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = encodeURIComponent(document.getElementById('f-name').value || '');
+        const subj = encodeURIComponent(document.getElementById('f-subject').value || 'Hello from samuel29102002.github.io');
+        const bodyRaw = (document.getElementById('f-body').value || '') + (name ? `\n\n— ${decodeURIComponent(name)}` : '');
+        const body = encodeURIComponent(bodyRaw);
+        window.location.href = `mailto:samuelheinrich2002@gmail.com?subject=${subj}&body=${body}`;
+      });
+    });
+  </script>
+</body>
+</html>

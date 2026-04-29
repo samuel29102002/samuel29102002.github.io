@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects · Samuel Heinrich</title>
+  <meta name="description" content="Open-source projects by Samuel Heinrich — Rust matching engines, derivatives pricing, energy forecasting, machine learning on sensor data." />
+  <meta name="theme-color" content="#080808" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Projects · Samuel Heinrich" />
+  <meta property="og:description" content="Quant simulators, derivatives pricing, energy forecasting, sensor ML." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/samuel29102002/orderflow-lab/main/docs/screenshots/landing-hero.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><span class="dot"></span> Samuel Heinrich</a>
+      <button class="nav-burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="hobbies.html">Hobbies</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       Page hero
+       ============================================================ -->
+  <section style="padding-top: calc(var(--s-9) + 4rem); padding-bottom: var(--s-7);">
+    <div class="container">
+      <span class="eyebrow">Projects · Live from GitHub</span>
+      <h1 style="font-size: var(--fs-3xl); margin-bottom: var(--s-5);">A repository of<br/>small, finished things.</h1>
+      <p class="muted" style="font-size: var(--fs-lg); max-width: 64ch;">Each card below is a real public repo on <a class="accent" href="https://github.com/samuel29102002" target="_blank" rel="noopener">github.com/samuel29102002</a>. Featured five sit at the top — Rust matching engines, German Express certificate pricing, IMU sensor ML, energy forecasting, and emotional-trait classifiers. The rest are honest scratchpads.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Stats strip
+       ============================================================ -->
+  <section class="section-tight" style="padding-top: 0;">
+    <div class="container">
+      <div class="grid grid-4" style="border-top: var(--border); border-bottom: var(--border); padding-block: var(--s-5);">
+        <div>
+          <div class="mono" style="color: var(--accent); font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase;">Languages</div>
+          <div class="serif" style="font-size: var(--fs-xl); margin-top: var(--s-2);">Python · Rust · C</div>
+        </div>
+        <div>
+          <div class="mono" style="color: var(--accent); font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase;">Featured</div>
+          <div class="serif" style="font-size: var(--fs-xl); margin-top: var(--s-2);">5 repos</div>
+        </div>
+        <div>
+          <div class="mono" style="color: var(--accent); font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase;">Domains</div>
+          <div class="serif" style="font-size: var(--fs-xl); margin-top: var(--s-2);">Quant · ML · Energy</div>
+        </div>
+        <div>
+          <div class="mono" style="color: var(--accent); font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase;">Updated</div>
+          <div class="serif" style="font-size: var(--fs-xl); margin-top: var(--s-2);" id="last-updated">live</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Project grid
+       ============================================================ -->
+  <section style="padding-top: var(--s-6);">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-num">01 · All repos</span>
+          <h2 class="section-title">Featured first, then everything else.</h2>
+        </div>
+        <p class="section-sub">Cards with screenshots have one. Cards with a 📄 badge link directly to the project paper or poster.</p>
+      </div>
+
+      <div class="projects-grid" data-github-grid data-featured-only="false"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Methodology / how I build
+       ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-num">02 · How I build</span>
+          <h2 class="section-title">Reproducible or it didn't happen.</h2>
+        </div>
+        <p class="section-sub">Three rules I keep coming back to.</p>
+      </div>
+
+      <div class="grid grid-3 stagger">
+        <div class="card card-corner">
+          <div class="mono accent" style="font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: var(--s-3);">01</div>
+          <h3 style="margin-bottom: var(--s-3);">Boots on a laptop</h3>
+          <p class="muted">No paid infra, no proprietary feed, no GPU. If a peer can't reproduce a result on a clean shell, it's a story, not a project.</p>
+        </div>
+        <div class="card card-corner">
+          <div class="mono accent" style="font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: var(--s-3);">02</div>
+          <h3 style="margin-bottom: var(--s-3);">Benchmarks before charts</h3>
+          <p class="muted">Ops/sec, ms/inference, % accuracy. Numbers go in the README before any pretty visualisation. Charts decorate; benchmarks decide.</p>
+        </div>
+        <div class="card card-corner">
+          <div class="mono accent" style="font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: var(--s-3);">03</div>
+          <h3 style="margin-bottom: var(--s-3);">German precision, indie tempo</h3>
+          <p class="muted">Type-checked public APIs, files under 500 lines, tests where it matters — but shipped on the timeline of someone with a piano practice in the evening.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 · Samuel Heinrich</span>
+      <span>Live data · GitHub API · 60 req/h unauth</span>
+      <span>Built with HTML · CSS · JS</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+  <script src="js/github.js" defer></script>
+  <script src="js/scroll.js" defer></script>
+  <script src="js/nav.js" defer></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const u = document.getElementById('last-updated');
+      if (u) u.textContent = new Date().toISOString().slice(0, 10);
+    });
+  </script>
+</body>
+</html>
