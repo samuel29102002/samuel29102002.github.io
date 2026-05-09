@@ -1,164 +1,178 @@
 # Samuel Heinrich · Personal Site
 
-Personal portfolio for Samuel Heinrich. Pure HTML5 + CSS3 + Vanilla JS, zero build step. Deploys directly to GitHub Pages.
+Editorial portfolio for Samuel Heinrich. Built with Next.js 14 (App Router),
+TypeScript, Tailwind CSS, Framer Motion and a small set of bespoke components
+adapted from 21st.dev / Aceternity. Deploys as a static export to GitHub Pages.
 
-**Live target:** `https://samuel29102002.github.io/`
+**Live:** [samuel29102002.github.io](https://samuel29102002.github.io/)
 
 ---
 
 ## Stack
 
-- HTML5 / CSS3 / Vanilla JS — no npm, no bundler, no Jekyll.
-- [Three.js r128](https://threejs.org/) — hero particle field + about-page globe.
-- [GSAP 3 + ScrollTrigger](https://greensock.com/) — scroll experiences.
-- [Lenis](https://lenis.studiofreight.com/) — smooth scroll.
-- All libraries loaded from CDN. No package manager required.
+| Layer       | Choice                                                    |
+| ----------- | --------------------------------------------------------- |
+| Framework   | Next.js 14 (App Router, `output: 'export'`)               |
+| Language    | TypeScript (strict)                                       |
+| Styling     | Tailwind CSS 3.4 + `tailwindcss-animate`                  |
+| UI          | shadcn/ui patterns + 21st.dev-style cinematic components  |
+| Animation   | Framer Motion (primary), GSAP ScrollTrigger (secondary)   |
+| Fonts       | `next/font/google` — Cormorant Garamond, Syne, Fira Code  |
+| Hosting     | GitHub Pages (user repo, static `out/`)                   |
+| CI          | GitHub Actions (`.github/workflows/deploy.yml`)           |
 
 ---
 
-## Local preview
-
-Any static server will do. From this directory:
+## Getting started
 
 ```bash
-# Python 3
-python3 -m http.server 4000
+# 1. Install deps
+npm install
 
-# Node (if you have it)
-npx serve .
+# 2. Develop
+npm run dev          # http://localhost:3000
+
+# 3. Build static export
+npm run build        # output written to ./out
 ```
 
-Then open <http://localhost:4000>.
+The build is fully static — no server-side runtime, no dynamic routes, all
+GitHub data is fetched client-side at runtime.
 
 ---
 
-## Deploy to GitHub Pages
-
-This site is meant to live on the user-page repo `samuel29102002.github.io`.
-
-```bash
-# 1 · Create the user-page repo (one time, on github.com)
-#    Repo name MUST be exactly: samuel29102002.github.io
-
-# 2 · From this folder, push everything to that repo's main branch
-git init
-git remote add origin https://github.com/samuel29102002/samuel29102002.github.io.git
-git add .
-git commit -m "Initial site"
-git branch -M main
-git push -u origin main
-
-# 3 · GitHub Pages will be served from main automatically.
-#     Visit: https://samuel29102002.github.io/
-```
-
-The empty `.nojekyll` file disables Jekyll processing — required so paths beginning with `_` work and so build is skipped entirely.
-
-`CNAME` is empty. If you ever want a custom domain (e.g. `samuelheinrich.de`), put the bare hostname on a single line of `CNAME` and add the DNS records GitHub asks for.
-
----
-
-## File structure
+## Project structure
 
 ```
 .
-├─ index.html              · hero + about + skills + featured projects
-├─ projects.html           · all repos, live-fetched, screenshots & PDFs
-├─ about.html              · timeline, bio, 3D globe of visited cities
-├─ hobbies.html            · horizontal pinned scroll (5 panels)
-├─ contact.html            · channels + mailto form
-├─ css/
-│   ├─ style.css           · design system, layout, components
-│   └─ animations.css      · keyframes + reveal classes
-├─ js/
-│   ├─ three-scene.js      · hero particle field + globe
-│   ├─ scroll.js           · Lenis + GSAP ScrollTrigger experiences
-│   ├─ nav.js              · mobile menu, active states, page transitions
-│   └─ github.js           · live GitHub API fetch + card renderer
-├─ assets/
-│   └─ favicon.svg         · "SH" monogram
-├─ .nojekyll               · disable Jekyll on GitHub Pages
-├─ CNAME                   · custom domain placeholder (empty)
-└─ README.md
+├── app/
+│   ├── layout.tsx                 # root layout, fonts, nav
+│   ├── globals.css                # tailwind + tokens + utilities
+│   ├── page.tsx                   # / — Prisma hero + about + skills cloud
+│   ├── about/page.tsx             # /about — radial orbital timeline + stats
+│   ├── projects/page.tsx          # /projects — ContainerScroll + grid
+│   ├── hobbies/page.tsx           # /hobbies — Lamp + horizontal pinned scroll
+│   └── contact/page.tsx           # /contact — form + cinematic footer
+├── components/
+│   ├── nav.tsx                    # sticky nav, mobile overlay
+│   └── ui/
+│       ├── animated-gradient.tsx       # WebGL Prism preset
+│       ├── prisma-hero.tsx             # cinematic hero w/ WordsPullUp
+│       ├── radial-orbital-timeline.tsx # orbital interactive timeline
+│       ├── container-scroll-animation.tsx
+│       ├── motion-footer.tsx           # magnetic CTA + glass pills + marquee
+│       ├── lamp.tsx                    # amber lamp glow
+│       └── button.tsx                  # shadcn-style button primitive
+├── lib/
+│   ├── github.ts                  # typed GitHub API utilities
+│   └── utils.ts                   # cn() helper
+├── public/
+│   ├── favicon.svg
+│   └── .nojekyll                  # disables Jekyll on GH Pages
+├── .github/workflows/deploy.yml   # CI build + deploy to Pages
+├── next.config.ts                 # output: 'export'
+├── tailwind.config.ts
+├── tsconfig.json
+└── package.json
 ```
 
-All paths are **relative** so the site works whether it's served from
-`samuel29102002.github.io/` or a project subpath.
+---
+
+## Design system
+
+| Token         | Value                              |
+| ------------- | ---------------------------------- |
+| Background    | `#0f0f0f` (near-black, not pure)   |
+| Surface       | `#181818` (cards, inputs)          |
+| Border        | `#252525`                          |
+| Text          | `#f2ede7` (warm off-white)         |
+| Muted text    | `#888880`                          |
+| Accent        | `#d4a843` (amber-gold)             |
+| Accent dim    | `#9a7830`                          |
+| Display font  | Cormorant Garamond · 300 / 400 / 600 |
+| Body font     | Syne · 400 / 500 / 700             |
+| Mono font     | Fira Code · 400                    |
+
+Tokens live in `tailwind.config.ts` (color names, fluid font sizes) and
+`app/globals.css` (CSS variables + utility classes like `.glass-card`,
+`.skill-pill`, `.img-slot`).
+
+Image placeholder slots use `.img-slot` — drop a real image into `/public/assets/`
+and replace the slot markup. Each slot includes the expected file path inline so
+it's obvious what to add and where.
 
 ---
 
-## Adding screenshots and PDFs to project cards
+## GitHub data
 
-The project cards are rendered in [`js/github.js`](js/github.js). Each repo
-has an entry in the `META` object near the top of that file:
+`lib/github.ts` exposes a typed API:
 
-```js
-const META = {
-  'orderflow-lab': {
-    tagline: '...',
-    cover: 'https://raw.githubusercontent.com/.../docs/screenshots/landing-hero.png',
-    tags: ['rust', 'pytorch', 'fastapi'],
-    hasPdf: false
-  },
-  'My-Other-Repo': {
-    tagline: 'One-paragraph description.',
-    cover: 'https://raw.githubusercontent.com/samuel29102002/My-Other-Repo/main/screenshots/cover.png',
-    tags: ['ml', 'python'],
-    pdf: 'https://raw.githubusercontent.com/samuel29102002/My-Other-Repo/main/paper.pdf',
-    hasPdf: true
-  }
-};
+```ts
+fetchRepos(username): Promise<Repo[]>
+fetchReadme(username, repo): Promise<string>
+fetchRepoScreenshots(username, repo, max?): Promise<string[]>
+loadProjects({ featuredOnly, limit }): Promise<Repo[]>
 ```
 
-To add or change a card:
+`loadProjects()` is the high-level helper used by the projects page. It:
 
-1. Drop a screenshot into the **target repo** (e.g. `docs/screenshots/cover.png`).
-2. Push it to GitHub.
-3. Copy the `raw.githubusercontent.com` URL.
-4. Edit the `META` entry in `js/github.js` and commit.
+1. Fetches `samuel29102002`'s repos.
+2. Sorts the `FEATURED` list to the top (orderflow-lab, MLES_IMU, CTDP,
+   Energy_Data_Science, LEMON-Love-Predictor).
+3. Synthesises a stub for any featured repo that lives in another account —
+   e.g. `LEMON-Love-Predictor` lives at
+   [github.com/nicola1702/LEMON-Love-Predictor](https://github.com/nicola1702/LEMON-Love-Predictor).
+4. Falls back to a hardcoded set on API failure (rate-limit, network) so the
+   page is never blank.
 
-To feature a repo (gold border, top of grid):
-
-- Add the repo name to the `FEATURED` array in `js/github.js`.
+To feature a new repo: add its name to `FEATURED` in `lib/github.ts` and a
+matching entry in `META`.
 
 ---
 
-## Tweaking the design system
+## Deploy
 
-All design tokens live as CSS variables at the top of [`css/style.css`](css/style.css):
+The site auto-deploys on every push to `main` via GitHub Actions
+(`.github/workflows/deploy.yml`):
 
-```css
-:root {
-  --bg:        #080808;
-  --text:      #f2ede7;
-  --accent:    #d4a843;
-  --f-display: 'DM Serif Display', Georgia, serif;
-  --f-body:    'Instrument Sans', ...;
-  --f-mono:    'JetBrains Mono', ...;
-  ...
-}
+1. Checkout
+2. `npm ci`
+3. `npm run build` (Next.js static export → `./out`)
+4. Upload `out/` as a Pages artifact
+5. `actions/deploy-pages@v4` publishes it
+
+To enable: in the repo settings → **Pages** → **Source: GitHub Actions**.
+
+For manual deploy:
+
+```bash
+npm ci
+npm run build
+# copy out/* to your gh-pages branch / hosting target
 ```
 
-Change those and the entire site updates.
+The repo `samuel29102002.github.io` is a **user page**, served at
+`https://samuel29102002.github.io/`. No `basePath` is needed. For project pages,
+set `basePath: '/repo-name'` and `assetPrefix: '/repo-name/'` in
+`next.config.ts`.
 
 ---
 
-## Performance notes
+## Polish checklist (all green)
 
-- Three.js particle count adapts to viewport (≤220 on mobile, ≤480 on desktop).
-- WebGL is feature-detected — pages still render fully without it.
-- All images use `loading="lazy"` and explicit `width`/`height` to avoid CLS.
-- Reduced-motion users get instant transitions and no Lenis smoothing.
-
----
-
-## Browser support
-
-Modern evergreen browsers (Chrome / Edge / Firefox / Safari, last 2 versions).
-Mobile Safari and Chrome Android tested. IE is not supported.
+- [x] WebGL gradient runs continuously — never paused by scroll
+- [x] All GSAP ScrollTrigger instances killed in `useEffect` cleanup
+- [x] Framer Motion respects `prefers-reduced-motion`
+- [x] Skill pills fly in from 4 directions (GSAP, `back.out` / `power3.out`)
+- [x] LEMON repo URL → `github.com/nicola1702/LEMON-Love-Predictor`
+- [x] All inter-page links use Next.js `<Link>` with relative hrefs
+- [x] `output: 'export'` builds without errors
+- [x] `.nojekyll` shipped in `/public`
+- [x] OG meta tags on every page (title, description, image)
+- [x] Mobile: hamburger overlay nav, single column, `clamp()` font sizes
 
 ---
 
 ## License
 
-Code: MIT. Content (text, photos, project descriptions): © Samuel Heinrich, all rights reserved.
+Code: MIT. Content (text, photos, project descriptions): © Samuel Heinrich.
