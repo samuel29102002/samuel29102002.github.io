@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   MapPin,
@@ -248,13 +249,27 @@ export default function AboutPage() {
 
           {/* RIGHT — Bio + stats + portrait */}
           <div className="flex flex-col gap-8">
-            <div className="img-slot aspect-[3/4] w-full max-w-[420px]">
-              <span>
-                [ add photo here:
-                <br />
-                /assets/images/samuel-portrait.jpg ]
-              </span>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-[420px] overflow-hidden rounded-md border border-border"
+            >
+              <Image
+                src="/assets/images/samuel-portrait.jpg"
+                alt="Samuel Heinrich"
+                width={840}
+                height={1120}
+                priority
+                sizes="(min-width: 1024px) 420px, 90vw"
+                className="block h-auto w-full object-cover grayscale-[15%] transition-all duration-500 ease-soft hover:grayscale-0"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg/60 via-transparent to-transparent"
+              />
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 12 }}
