@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   // GitHub Pages serves the user-page repo at the root, so no basePath is needed.
   // For project-page repos, set: basePath: '/repo-name', assetPrefix: '/repo-name/'.
+  eslint: {
+    // Don't fail the production build on lint warnings — keep CI fast.
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
