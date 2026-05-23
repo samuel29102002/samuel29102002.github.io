@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    --bg: 15 15 15;
-    --surface: 24 24 24;
-    --border: 37 37 37;
-    --text: 242 237 231;
-    --muted: 136 136 128;
-    --accent: 212 168 67;
-    --accent-dim: 154 120 48;
-    --radius: 0.375rem;
+    --bg: 10 10 10;
+    --surface: 17 17 17;
+    --border: 28 28 28;
+    --text: 228 224 216;
+    --muted: 88 88 84;
+    --accent: 230 25 25;
+    --accent-dim: 168 18 18;
+    --radius: 0;
   }
 
   *,
@@ -33,17 +33,20 @@
     min-height: 100vh;
   }
 
-  /* Editorial fractal-noise overlay */
+  /* CRT scanlines */
   body::after {
     content: '';
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 200;
-    opacity: 0.035;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    background-size: 220px 220px;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.06) 2px,
+      rgba(0, 0, 0, 0.06) 4px
+    );
   }
 
   h1, h2, h3, h4 {

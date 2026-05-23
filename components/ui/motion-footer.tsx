@@ -105,7 +105,7 @@ export default function SiteFooter() {
                   <text
                     fontSize="8"
                     fontFamily="var(--font-fira), monospace"
-                    fill="rgb(212,168,67)"
+                    fill="rgb(230,25,25)"
                     letterSpacing="3.2"
                   >
                     <textPath href="#sf-circle" startOffset="0%">

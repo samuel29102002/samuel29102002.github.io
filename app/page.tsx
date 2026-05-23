@@ -145,7 +145,7 @@ function SkillsSection() {
         >
           {/* Prompt line */}
           <div className="mb-4 text-[0.76rem]">
-            <span className="text-emerald-400">samuel@tübingen</span>
+            <span className="text-accent">samuel@tübingen</span>
             <span className="text-muted">:</span>
             <span className="text-accent">~</span>
             <span className="text-muted">$ </span>
@@ -176,7 +176,7 @@ function SkillsSection() {
           {/* Final cursor */}
           {done && (
             <div className="mt-4 text-[0.76rem]">
-              <span className="text-emerald-400">samuel@tübingen</span>
+              <span className="text-accent">samuel@tübingen</span>
               <span className="text-muted">:</span>
               <span className="text-accent">~</span>
               <span className="text-muted">$ </span>

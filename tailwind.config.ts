@@ -17,15 +17,15 @@ const config: Config = {
     },
     extend: {
       colors: {
-        bg: '#0f0f0f',
-        surface: '#181818',
-        border: '#252525',
-        muted: '#888880',
-        text: '#f2ede7',
+        bg: '#0a0a0a',
+        surface: '#111111',
+        border: '#1c1c1c',
+        muted: '#585854',
+        text: '#e4e0d8',
         accent: {
-          DEFAULT: '#d4a843',
-          dim: '#9a7830',
-          glow: 'rgba(212, 168, 67, 0.22)',
+          DEFAULT: '#e61919',
+          dim: '#a81212',
+          glow: 'rgba(230, 25, 25, 0.15)',
         },
         prism: {
           deep: '#0a0e1a',
@@ -34,10 +34,10 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['var(--font-cormorant)', 'Georgia', 'serif'],
-        body: ['var(--font-syne)', 'system-ui', 'sans-serif'],
-        sans: ['var(--font-syne)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-fira)', 'ui-monospace', 'monospace'],
+        display: ['var(--font-oswald)', 'sans-serif'],
+        body: ['var(--font-space)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-space)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-jetbrains)', 'ui-monospace', 'monospace'],
       },
       fontSize: {
         'fluid-sm': 'clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem)',

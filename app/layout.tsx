@@ -1,26 +1,26 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Syne, Fira_Code } from 'next/font/google';
+import { Oswald, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import Nav from '@/components/nav';
 import './globals.css';
 
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-cormorant',
-  display: 'swap',
-});
-
-const syne = Syne({
+const oswald = Oswald({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-syne',
+  variable: '--font-oswald',
   display: 'swap',
 });
 
-const fira = Fira_Code({
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-space',
+  display: 'swap',
+});
+
+const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-fira',
+  variable: '--font-jetbrains',
   display: 'swap',
 });
 
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0f0f0f',
+  themeColor: '#0a0a0a',
   width: 'device-width',
   initialScale: 1,
 };
@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${syne.variable} ${fira.variable}`}
+      className={`${oswald.variable} ${spaceGrotesk.variable} ${jetbrains.variable}`}
     >
       <body className="min-h-screen bg-bg font-body text-text antialiased">
         <Nav />
