@@ -1,295 +1,235 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import {
-  MapPin,
-  GraduationCap,
-  Building2,
-  Plane,
-  Award,
-  FlaskConical,
-  BookOpen,
-  Globe,
-  Briefcase,
-} from 'lucide-react';
-import RadialOrbitalTimeline, {
-  type OrbitalItem,
-} from '@/components/ui/radial-orbital-timeline';
-import { fetchRepos } from '@/lib/github';
 
-const timelineData: OrbitalItem[] = [
+const TIMELINE = [
+  { year: '2002', title: 'Born', desc: 'Born in Germany.', side: 'left' as const },
+  { year: '2021', title: 'Abitur', desc: 'Finished secondary school.', side: 'right' as const },
   {
-    id: 1,
-    title: 'Born',
-    date: '2002',
-    content: 'Born in Germany.',
-    category: 'Life',
-    icon: MapPin,
-    relatedIds: [2],
-    status: 'completed',
-    energy: 100,
-  },
-  {
-    id: 2,
-    title: 'Abitur',
-    date: '2021',
-    content: 'Finished secondary school.',
-    category: 'Education',
-    icon: GraduationCap,
-    relatedIds: [1, 3],
-    status: 'completed',
-    energy: 100,
-  },
-  {
-    id: 3,
+    year: '2021',
     title: 'DHBW Stuttgart',
-    date: '2021',
-    content:
-      'B.Sc. Wirtschaftsinformatik – Data Science. Partner company: TRUMPF SE.',
-    category: 'Education',
-    icon: Building2,
-    relatedIds: [2, 4],
-    status: 'completed',
-    energy: 95,
+    desc: 'B.Sc. Wirtschaftsinformatik – Data Science. Partner company: TRUMPF SE.',
+    side: 'left' as const,
   },
   {
-    id: 4,
+    year: '2023',
     title: 'USA',
-    date: '2023',
-    content: '6-month international assignment at TRUMPF Inc., Farmington CT.',
-    category: 'Work',
-    icon: Plane,
-    relatedIds: [3, 5],
-    status: 'completed',
-    energy: 90,
+    desc: '6-month international assignment at TRUMPF Inc., Farmington CT.',
+    side: 'right' as const,
   },
+  { year: 'Jun 2024', title: 'Bachelor', desc: 'B.Sc. completed.', side: 'left' as const },
   {
-    id: 5,
-    title: 'Bachelor',
-    date: 'Jun 2024',
-    content: 'B.Sc. completed.',
-    category: 'Education',
-    icon: Award,
-    relatedIds: [4, 6],
-    status: 'completed',
-    energy: 100,
-  },
-  {
-    id: 6,
+    year: 'Oct 2024',
     title: "Master's",
-    date: 'Oct 2024',
-    content:
-      'M.Sc. Quantitative Data Science Methods, Eberhard Karls Universität Tübingen. 15 admitted of 300 applicants.',
-    category: 'Education',
-    icon: FlaskConical,
-    relatedIds: [5, 7, 8],
-    status: 'in-progress',
-    energy: 70,
+    desc: 'M.Sc. Quantitative Data Science Methods, Eberhard Karls Universität Tübingen. 15 admitted of 300 applicants.',
+    side: 'right' as const,
   },
   {
-    id: 7,
-    title: 'Tutor',
-    date: '2025',
-    content: 'Statistics tutor, University of Tübingen.',
-    category: 'Work',
-    icon: BookOpen,
-    relatedIds: [6],
-    status: 'completed',
-    energy: 80,
-  },
-  {
-    id: 8,
-    title: 'Tallinn',
-    date: 'Aug 2025',
-    content:
-      'Exchange semester at TalTech, Tallinn, Estonia. Scholarship recipient. Projects: MLES_IMU, Energy Data Science.',
-    category: 'Education',
-    icon: Globe,
-    relatedIds: [6, 9],
-    status: 'completed',
-    energy: 95,
-  },
-  {
-    id: 9,
+    year: '2025 →',
     title: 'Schwarz Group',
-    date: 'Jan 2026',
-    content:
-      'Werkstudent at Schwarz Group (Lidl/Kaufland/PreZero) alongside Master’s and student organisation leadership.',
-    category: 'Work',
-    icon: Briefcase,
-    relatedIds: [8],
-    status: 'in-progress',
-    energy: 85,
+    desc: "Werkstudent at Schwarz Group (Lidl/Kaufland/PreZero) alongside the Master's and student organisation leadership.",
+    side: 'left' as const,
   },
 ];
 
-function StatsCard() {
-  const [repoCount, setRepoCount] = useState<number | null>(null);
+const STATS = [
+  { value: 15, suffix: '', label: 'of 300 admitted', note: 'M.Sc. · Tübingen' },
+  { value: 6, suffix: ' mo', label: "int'l assignment", note: 'TRUMPF · Connecticut' },
+  { value: 3, suffix: '', label: 'countries studied', note: 'DE · US · EE' },
+];
+
+function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
 
   useEffect(() => {
-    let cancelled = false;
-    fetchRepos()
-      .then((repos) => {
-        if (cancelled) return;
-        const count = repos.filter((r) => !r.fork && !r.archived).length;
-        setRepoCount(count);
-      })
-      .catch(() => {
-        if (!cancelled) setRepoCount(13);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          const dur = 1200;
+          const t0 = performance.now();
+          const tick = (now: number) => {
+            const p = Math.min((now - t0) / dur, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(ease * target) + suffix;
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [target, suffix]);
 
-  const stats = [
-    {
-      label: 'Admitted',
-      value: 'top 5%',
-      detail: '15 / 300 applicants',
-      progress: 95,
-    },
-    {
-      label: 'Exchange',
-      value: 'TalTech Tallinn',
-      detail: 'scholarship recipient',
-      progress: 100,
-    },
-    {
-      label: 'Repos',
-      value: repoCount === null ? '—' : `${repoCount}+`,
-      detail: 'live · github API',
-      progress: 80,
-    },
-  ];
-
-  return (
-    <div className="glass-card p-6">
-      <div className="mb-5 flex items-center justify-between">
-        <span className="font-mono text-[0.66rem] uppercase tracking-[0.24em] text-muted">
-          Quick Stats
-        </span>
-        <span className="inline-flex items-center gap-2 font-mono text-[0.66rem] uppercase tracking-[0.18em] text-emerald-300">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-          </span>
-          Currently studying
-        </span>
-      </div>
-
-      <div className="flex flex-col gap-5">
-        {stats.map((s, i) => (
-          <motion.div
-            key={s.label}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col gap-1.5"
-          >
-            <div className="flex items-baseline justify-between gap-3">
-              <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-muted">
-                {s.label}
-              </span>
-              <span className="font-mono text-[0.66rem] text-muted">{s.detail}</span>
-            </div>
-            <span className="font-display text-2xl tracking-tight text-text">{s.value}</span>
-            <div className="h-[3px] overflow-hidden rounded-full bg-border">
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: `${s.progress}%` }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 + 0.2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="h-full rounded-full bg-gradient-to-r from-accent-dim to-accent"
-              />
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="mt-6 flex flex-wrap gap-1.5">
-        {['Statistics', 'Machine Learning', 'Time Series', 'Quant Finance'].map((t) => (
-          <span
-            key={t}
-            className="rounded-full border border-border px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-muted"
-          >
-            {t}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
+  return <span ref={ref}>0{suffix}</span>;
 }
 
 export default function AboutPage() {
   return (
-    <div className="pt-32">
-      <section className="mx-auto max-w-screen-xl px-6 pb-12 lg:px-12">
-        <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
-          About
-        </span>
-        <h1 className="mt-3 max-w-[18ch] font-display text-fluid-3xl font-medium tracking-tighter">
-          Samuel Heinrich.
-        </h1>
+    <div className="pt-28">
+      {/* ── Split-screen intro ── */}
+      <section className="mx-auto max-w-screen-xl px-6 pb-16 lg:px-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[55fr_45fr] lg:gap-14">
+          {/* Portrait — clip-path reveal */}
+          <motion.div
+            initial={{ clipPath: 'inset(0 100% 0 0)' }}
+            animate={{ clipPath: 'inset(0 0% 0 0)' }}
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative h-[70vh] overflow-hidden rounded-sm"
+            style={{ boxShadow: 'inset 0 0 0 1px rgba(212,168,67,0.35)' }}
+          >
+            <Image
+              src="/assets/images/samuel-portrait.jpg"
+              alt="Samuel Heinrich"
+              fill
+              priority
+              sizes="(min-width:1024px) 55vw, 90vw"
+              className="object-cover grayscale-[15%] transition-all duration-700 ease-soft hover:grayscale-0"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg/50 via-transparent to-transparent"
+            />
+          </motion.div>
+
+          {/* Bio */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col justify-center gap-6"
+          >
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
+              About
+            </span>
+            <h1 className="font-display text-fluid-3xl tracking-tighter" style={{ lineHeight: 1 }}>
+              Data + Finance.
+              <br />
+              Tübingen.
+            </h1>
+            <div className="flex flex-col gap-3 text-fluid-base leading-relaxed text-text/80">
+              <p>
+                I study quantitative data science at the University of Tübingen — 15 admitted of
+                300 applicants. Before that, a dual B.Sc. at DHBW Stuttgart with TRUMPF SE,
+                including six months at TRUMPF Inc. in Farmington, Connecticut.
+              </p>
+              <p>
+                Most of my work sits at the intersection of statistics, machine learning, and
+                finance. Currently a Werkstudent at the Schwarz Group alongside my Master&apos;s.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2 pt-1">
+              {['M.Sc. · Tübingen', 'TRUMPF · Connecticut', 'Schwarz Group'].map((pill) => (
+                <span
+                  key={pill}
+                  className="rounded-full border border-accent/40 px-3.5 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent"
+                >
+                  {pill}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-screen-xl px-6 pb-16 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
-          {/* LEFT — Orbital timeline */}
-          <div className="relative">
-            <div className="mb-6 flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.24em] text-muted">
-              <span className="block h-px w-8 bg-accent" />
-              Timeline · click a node
-            </div>
-            <RadialOrbitalTimeline items={timelineData} radius={210} />
-          </div>
-
-          {/* RIGHT — Bio + stats + portrait */}
-          <div className="flex flex-col gap-8">
+      {/* ── Stats row ── */}
+      <section className="mx-auto max-w-screen-xl px-6 pb-20 lg:px-12">
+        <div className="grid grid-cols-1 divide-y divide-border border border-border sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          {STATS.map((s, i) => (
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-[420px] overflow-hidden rounded-md border border-border"
-            >
-              <Image
-                src="/assets/images/samuel-portrait.jpg"
-                alt="Samuel Heinrich"
-                width={840}
-                height={1120}
-                priority
-                sizes="(min-width: 1024px) 420px, 90vw"
-                className="block h-auto w-full object-cover grayscale-[15%] transition-all duration-500 ease-soft hover:grayscale-0"
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg/60 via-transparent to-transparent"
-              />
-            </motion.div>
-
-            <motion.div
+              key={s.label}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col gap-4 text-fluid-base text-text/90"
+              transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col gap-1 px-8 py-8"
             >
-              <p>
-                I study quantitative data science at the University of Tübingen. Before that, a
-                dual B.Sc. at DHBW Stuttgart with TRUMPF SE — including six months at TRUMPF Inc.
-                in Farmington, Connecticut.
-              </p>
-              <p>
-                Werkstudent at the Schwarz Group, alongside the Master's. Most of my work sits at
-                the intersection of statistics, machine learning, and finance.
-              </p>
+              <span className="font-display text-5xl tracking-tighter text-text">
+                <CountUp target={s.value} suffix={s.suffix} />
+              </span>
+              <span className="font-mono text-xs text-accent">{s.note}</span>
+              <span className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-muted">
+                {s.label}
+              </span>
             </motion.div>
+          ))}
+        </div>
+      </section>
 
-            <StatsCard />
+      {/* ── Timeline ── */}
+      <section className="mx-auto max-w-screen-xl px-6 pb-28 lg:px-12">
+        <div className="mb-14 text-center">
+          <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
+            · Timeline ·
+          </span>
+        </div>
+
+        <div className="relative">
+          {/* Center line (desktop only) */}
+          <div
+            aria-hidden
+            className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-border lg:block"
+          />
+
+          <div className="flex flex-col gap-14">
+            {TIMELINE.map((entry, i) => (
+              <motion.div
+                key={`${entry.title}-${i}`}
+                initial={{ opacity: 0, x: entry.side === 'left' ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-8%' }}
+                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_3rem_1fr] lg:items-start"
+              >
+                {entry.side === 'left' ? (
+                  <>
+                    <div className="lg:pr-8 lg:text-right">
+                      <span className="font-mono text-[0.64rem] uppercase tracking-[0.22em] text-accent">
+                        {entry.year}
+                      </span>
+                      <h3 className="mt-1 font-display text-fluid-xl tracking-tight text-text">
+                        {entry.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted">{entry.desc}</p>
+                    </div>
+                    <div className="hidden items-start justify-center pt-2 lg:flex">
+                      <span className="relative flex h-3 w-3">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-25" />
+                        <span className="relative inline-flex h-3 w-3 rounded-full border border-accent bg-bg" />
+                      </span>
+                    </div>
+                    <div />
+                  </>
+                ) : (
+                  <>
+                    <div />
+                    <div className="hidden items-start justify-center pt-2 lg:flex">
+                      <span className="relative flex h-3 w-3">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-25" />
+                        <span className="relative inline-flex h-3 w-3 rounded-full border border-accent bg-bg" />
+                      </span>
+                    </div>
+                    <div className="lg:pl-8">
+                      <span className="font-mono text-[0.64rem] uppercase tracking-[0.22em] text-accent">
+                        {entry.year}
+                      </span>
+                      <h3 className="mt-1 font-display text-fluid-xl tracking-tight text-text">
+                        {entry.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted">{entry.desc}</p>
+                    </div>
+                  </>
+                )}
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

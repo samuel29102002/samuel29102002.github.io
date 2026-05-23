@@ -136,6 +136,37 @@
     box-shadow: 0 8px 22px -10px rgba(212, 168, 67, 0.4);
   }
 
+  /* ── Micro-interaction: link underline draw ── */
+  .link-draw {
+    position: relative;
+    text-decoration: none;
+  }
+  .link-draw::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 1px;
+    background: rgb(var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-draw:hover::after { transform: scaleX(1); }
+
+  /* ── Terminal cursor blink ── */
+  @keyframes terminal-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  /* ── Accent dash grow ── */
+  @keyframes dash-grow {
+    from { width: 0; opacity: 0; }
+    to   { opacity: 1; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;

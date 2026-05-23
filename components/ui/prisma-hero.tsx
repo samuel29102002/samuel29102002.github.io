@@ -6,11 +6,37 @@
  * <AnimatedGradient />. Nav items stripped — Samuel's nav lives in <Nav />.
  */
 
-import { motion } from 'framer-motion';
+import { useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import AnimatedGradient from './animated-gradient';
 import { cn } from '@/lib/utils';
+
+/* ── Particle scatter ── */
+interface Particle { id: number; x: number; y: number; angle: number; dist: number; }
+
+function ParticleLayer({ particles }: { particles: Particle[] }) {
+  return (
+    <AnimatePresence>
+      {particles.map((p) => (
+        <motion.span
+          key={p.id}
+          className="pointer-events-none absolute z-20 block h-1.5 w-1.5 rounded-full bg-accent"
+          initial={{ x: p.x, y: p.y, scale: 1, opacity: 0.9 }}
+          animate={{
+            x: p.x + Math.cos(p.angle) * p.dist,
+            y: p.y + Math.sin(p.angle) * p.dist,
+            scale: 0,
+            opacity: 0,
+          }}
+          exit={{}}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        />
+      ))}
+    </AnimatePresence>
+  );
+}
 
 interface WordsPullUpProps {
   text: string;
@@ -85,7 +111,26 @@ export const WordsPullUpMultiStyle = ({
   );
 };
 
+let _particleId = 0;
+
 export default function PrismaHero() {
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  const scatter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = (e.currentTarget as HTMLElement).closest('section')!.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+    const burst: Particle[] = Array.from({ length: 18 }, () => ({
+      id: _particleId++,
+      x: cx,
+      y: cy,
+      angle: Math.random() * Math.PI * 2,
+      dist: 60 + Math.random() * 80,
+    }));
+    setParticles((prev) => [...prev, ...burst]);
+    setTimeout(() => setParticles((prev) => prev.filter((p) => !burst.includes(p))), 900);
+  }, []);
+
   return (
     <section className="relative h-screen min-h-[640px] w-full overflow-hidden bg-bg">
       {/* WebGL gradient — always running */}
@@ -94,6 +139,9 @@ export default function PrismaHero() {
         {/* extra readability tint */}
         <div className="absolute inset-0 bg-gradient-to-b from-bg/40 via-transparent to-bg/85" />
       </div>
+
+      {/* Particle layer */}
+      <ParticleLayer particles={particles} />
 
       {/* Hero content */}
       <div className="relative z-10 mx-auto flex h-full max-w-screen-xl flex-col justify-center px-6 lg:px-12">
@@ -107,11 +155,14 @@ export default function PrismaHero() {
           <span>Tübingen · Stuttgart · DE</span>
         </motion.div>
 
-        <WordsPullUp
-          text="Samuel Heinrich"
-          className="font-display font-medium leading-[0.92] tracking-tighter text-text"
-          staggerStart={0.15}
-        />
+        {/* Click to scatter particles */}
+        <div onClick={scatter} className="cursor-default select-none">
+          <WordsPullUp
+            text="Samuel Heinrich"
+            className="font-display font-medium leading-[0.92] tracking-tighter text-text"
+            staggerStart={0.15}
+          />
+        </div>
 
         <motion.div
           initial={{ opacity: 0 }}
