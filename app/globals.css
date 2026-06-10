@@ -49,6 +49,44 @@
     );
   }
 
+  /* Film-grain noise — feTurbulence, blended over everything */
+  html::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 201;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-size: 240px 240px;
+  }
+
+  /* Graph paper through smoke — faint full-viewport grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 199;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+
+  /* Custom crosshair cursor — desktop pointer devices only */
+  @media (pointer: fine) and (min-width: 769px) {
+    body, a, button, input, textarea, canvas, [role='button'] {
+      cursor: none;
+    }
+  }
+
   h1, h2, h3, h4 {
     @apply font-display tracking-tighter;
     line-height: 1.1;
@@ -94,7 +132,7 @@
     justify-content: center;
     text-align: center;
     color: rgb(var(--muted));
-    font-family: var(--font-fira), monospace;
+    font-family: var(--font-jetbrains), monospace;
     font-size: 0.72rem;
     letter-spacing: 0.06em;
     padding: 1rem;
@@ -107,7 +145,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: repeating-linear-gradient(45deg, transparent 0 12px, rgba(212,168,67,0.04) 12px 24px);
+    background: repeating-linear-gradient(45deg, transparent 0 12px, rgba(230,25,25,0.04) 12px 24px);
     pointer-events: none;
   }
   .img-slot > span { position: relative; z-index: 1; max-width: 90%; }
@@ -117,7 +155,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1.05rem;
-    font-family: var(--font-fira), monospace;
+    font-family: var(--font-jetbrains), monospace;
     font-size: 0.82rem;
     letter-spacing: 0.04em;
     color: rgb(var(--text));
@@ -136,7 +174,7 @@
     transform: translateY(-3px);
     border-color: rgb(var(--accent));
     color: rgb(var(--accent));
-    box-shadow: 0 8px 22px -10px rgba(212, 168, 67, 0.4);
+    box-shadow: 0 8px 22px -10px rgba(230, 25, 25, 0.4);
   }
 
   /* ── Micro-interaction: link underline draw ── */
@@ -164,6 +202,91 @@
     50%       { opacity: 0; }
   }
 
+  /* ── Hero display type ── */
+  .hero-name {
+    font-size: clamp(5rem, 15vw, 15rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.88;
+  }
+  .hero-name--overlap { margin-top: -8px; }
+  @media (max-width: 768px) {
+    .hero-name { font-size: clamp(3rem, 12vw, 5rem); }
+  }
+
+  /* ── CRT glitch — signal dropout on hover ── */
+  .glitch {
+    position: relative;
+    display: inline-block;
+  }
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .glitch:hover::before {
+    color: rgb(var(--accent));
+    animation: glitch-r 0.15s steps(1) both;
+  }
+  .glitch:hover::after {
+    color: #19d8e6;
+    animation: glitch-c 0.15s steps(1) both;
+  }
+  @keyframes glitch-r {
+    0%   { opacity: 0.8; clip-path: inset(15% 0 60% 0); transform: translate(-4px, 1px); }
+    34%  { opacity: 0.8; clip-path: inset(62% 0 8% 0);  transform: translate(4px, -1px); }
+    67%  { opacity: 0.8; clip-path: inset(38% 0 42% 0); transform: translate(-2px, 0); }
+    100% { opacity: 0; }
+  }
+  @keyframes glitch-c {
+    0%   { opacity: 0.6; clip-path: inset(55% 0 20% 0); transform: translate(4px, -1px); }
+    34%  { opacity: 0.6; clip-path: inset(10% 0 70% 0); transform: translate(-4px, 1px); }
+    67%  { opacity: 0.6; clip-path: inset(72% 0 5% 0);  transform: translate(2px, 0); }
+    100% { opacity: 0; }
+  }
+
+  /* ── Ticker belts — GPU-composited marquee ── */
+  .ticker-belt {
+    display: flex;
+    width: max-content;
+    white-space: nowrap;
+    will-change: transform;
+    animation: ticker-scroll 28s linear infinite;
+  }
+  .ticker-belt--reverse {
+    animation: ticker-scroll 40s linear infinite reverse;
+  }
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── Custom crosshair cursor ── */
+  .custom-cursor {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    z-index: 300;
+    pointer-events: none;
+  }
+  @media (pointer: fine) and (min-width: 769px) {
+    .custom-cursor { display: block; }
+  }
+  .custom-cursor svg {
+    display: block;
+    animation: cursor-pulse 2s ease-in-out infinite;
+  }
+  @keyframes cursor-pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.15); }
+  }
+
   /* ── Accent dash grow ── */
   @keyframes dash-grow {
     from { width: 0; opacity: 0; }
@@ -172,9 +295,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
+      animation: none !important;
+      transition: none !important;
     }
   }
 }

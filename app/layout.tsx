@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Oswald, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import Nav from '@/components/nav';
+import CrosshairCursor from '@/components/cursor';
 import './globals.css';
 
 const oswald = Oswald({
@@ -27,28 +28,28 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://samuel29102002.github.io'),
   title: {
-    default: 'Samuel Heinrich',
+    default: 'SAMUEL HEINRICH — QDS / DATA ENGINEER',
     template: '%s · Samuel Heinrich',
   },
   description:
-    'M.Sc. Quantitative Data Science Methods, University of Tübingen. Werkstudent at Schwarz Group.',
+    'Quantitative Data Science MSc. Data engineering, audit analytics, roguelikes.',
   authors: [{ name: 'Samuel Heinrich' }],
   openGraph: {
     type: 'website',
     locale: 'en_GB',
     url: 'https://samuel29102002.github.io/',
     siteName: 'Samuel Heinrich',
-    title: 'Samuel Heinrich',
+    title: 'SAMUEL HEINRICH — QDS / DATA ENGINEER',
     description:
-      'Quantitative data science · machine learning · financial engineering. Tübingen.',
-    images: [
-      'https://raw.githubusercontent.com/samuel29102002/orderflow-lab/main/docs/screenshots/landing-hero.png',
-    ],
+      'Quantitative Data Science MSc. Data engineering, audit analytics, roguelikes.',
+    images: ['/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Samuel Heinrich',
-    description: 'Quantitative data science · MSc Tübingen.',
+    title: 'SAMUEL HEINRICH — QDS / DATA ENGINEER',
+    description:
+      'Quantitative Data Science MSc. Data engineering, audit analytics, roguelikes.',
+    images: ['/og-image.png'],
   },
   icons: {
     icon: '/favicon.svg',
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${oswald.variable} ${spaceGrotesk.variable} ${jetbrains.variable}`}
     >
       <body className="min-h-screen bg-bg font-body text-text antialiased">
+        <CrosshairCursor />
         <Nav />
         <main>{children}</main>
       </body>

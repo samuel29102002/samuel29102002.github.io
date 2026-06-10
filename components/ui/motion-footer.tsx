@@ -88,32 +88,39 @@ export default function SiteFooter() {
           {/* ── Col 1: Identity + rotating circle ── */}
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-5">
-              {/* Rotating SVG text circle */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 22, ease: 'linear', repeat: Infinity }}
-                className="h-[88px] w-[88px] flex-shrink-0"
-                aria-hidden
-              >
-                <svg viewBox="0 0 100 100" className="h-full w-full">
-                  <defs>
-                    <path
-                      id="sf-circle"
-                      d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-                    />
-                  </defs>
-                  <text
-                    fontSize="8"
-                    fontFamily="var(--font-fira), monospace"
-                    fill="rgb(230,25,25)"
-                    letterSpacing="3.2"
-                  >
-                    <textPath href="#sf-circle" startOffset="0%">
-                      AVAILABLE FOR WORK · AVAILABLE FOR WORK ·
-                    </textPath>
-                  </text>
-                </svg>
-              </motion.div>
+              {/* Rotating SVG text ring + static monogram */}
+              <div className="relative h-[88px] w-[88px] flex-shrink-0" aria-hidden>
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, ease: 'linear', repeat: Infinity }}
+                  className="absolute inset-0"
+                >
+                  <svg viewBox="0 0 100 100" className="h-full w-full">
+                    <defs>
+                      <path
+                        id="sf-circle"
+                        d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                      />
+                    </defs>
+                    <text
+                      fontSize="6.2"
+                      fontFamily="var(--font-jetbrains), monospace"
+                      fill="rgb(230,25,25)"
+                      letterSpacing="1"
+                    >
+                      <textPath href="#sf-circle" startOffset="0%">
+                        SAMUEL HEINRICH · QDS TÜBINGEN · SCHWARZ GROUP · VDST ZU TÜBINGEN ·
+                      </textPath>
+                    </text>
+                  </svg>
+                </motion.div>
+                <div
+                  className="absolute inset-0 flex items-center justify-center font-display font-bold text-accent"
+                  style={{ fontSize: '1.2rem' }}
+                >
+                  [ SH ]
+                </div>
+              </div>
 
               <div>
                 <div className="font-display text-xl tracking-tight text-text">

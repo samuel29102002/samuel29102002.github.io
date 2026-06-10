@@ -65,6 +65,7 @@ export default function DataDash() {
   const speed = useRef(5);
   const raf = useRef(0);
   const deathMsg = useRef('');
+  const deathAt = useRef(0);
   const lastObsX = useRef(0);
 
   const resetGame = useCallback(() => {
@@ -124,6 +125,11 @@ export default function DataDash() {
       const d = OBS_DEFS[o.type];
       ctx.fillStyle = d.fill;
       ctx.fillRect(o.x, o.y, o.w, o.h);
+      /* scanline texture — alternating 2px bands */
+      ctx.fillStyle = 'rgba(0,0,0,0.45)';
+      for (let ly = o.y + 2; ly < o.y + o.h; ly += 4) {
+        ctx.fillRect(o.x, ly, o.w, 2);
+      }
       ctx.strokeStyle = d.stroke;
       ctx.lineWidth = 1.5;
       ctx.strokeRect(o.x, o.y, o.w, o.h);
@@ -266,6 +272,7 @@ export default function DataDash() {
         for (const o of obstacles.current) {
           if (collision(o)) {
             state.current = 'dead';
+            deathAt.current = performance.now();
             deathMsg.current = DEATH_MESSAGES[Math.floor(Math.random() * DEATH_MESSAGES.length)];
             if (score.current > highScore.current) {
               highScore.current = score.current;
@@ -282,11 +289,19 @@ export default function DataDash() {
 
       /* ── DEAD ── */
       if (state.current === 'dead') {
+        const sinceDeath = performance.now() - deathAt.current;
+
+        /* screen shake — first 150ms after impact */
+        ctx.save();
+        if (sinceDeath < 150) {
+          ctx.translate(Math.random() * 8 - 4, 0);
+        }
+
         for (const o of obstacles.current) drawObs(o);
         drawPlayer();
 
         ctx.fillStyle = 'rgba(10,10,10,0.88)';
-        ctx.fillRect(0, 0, W, H);
+        ctx.fillRect(-8, 0, W + 16, H);
 
         /* red border frame */
         ctx.strokeStyle = '#e61919';
@@ -300,9 +315,15 @@ export default function DataDash() {
         ctx.font = 'bold 18px "JetBrains Mono", "Courier New", monospace';
         ctx.fillText('[ PROCESS KILLED ]', W / 2, H / 2 - 42);
 
-        ctx.fillStyle = '#585854';
+        /* death message flickers in letter by letter — 10ms per char */
+        const fullMsg = `> ${deathMsg.current}`;
+        const visChars = Math.min(fullMsg.length, Math.floor(sinceDeath / 10));
+        ctx.fillStyle = '#e61919';
         ctx.font = '10px "JetBrains Mono", "Courier New", monospace';
-        ctx.fillText(`> ${deathMsg.current}`, W / 2, H / 2 - 20);
+        ctx.textAlign = 'left';
+        const msgW = ctx.measureText(fullMsg).width;
+        ctx.fillText(fullMsg.slice(0, visChars), W / 2 - msgW / 2, H / 2 - 20);
+        ctx.textAlign = 'center';
 
         ctx.fillStyle = '#e4e0d8';
         ctx.font = '13px "JetBrains Mono", "Courier New", monospace';
@@ -315,6 +336,8 @@ export default function DataDash() {
         ctx.fillStyle = '#585854';
         ctx.font = '10px "JetBrains Mono", "Courier New", monospace';
         ctx.fillText('SPACE / TAP TO RESPAWN', W / 2, H / 2 + 54);
+
+        ctx.restore();
       }
     }
 

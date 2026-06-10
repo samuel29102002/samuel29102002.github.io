@@ -12,6 +12,23 @@ import { ArrowUpRight } from 'lucide-react';
 
 const SCRAMBLE_CHARS = '0123456789';
 
+/* ────────────────────────────────────────────────
+   Section clip-path reveal — inset bottom → open
+   ─────────────────────────────────────────────── */
+
+function Reveal({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ clipPath: 'inset(100% 0 0 0)', y: 20 }}
+      whileInView={{ clipPath: 'inset(0% 0 0 0)', y: 0 }}
+      viewport={{ once: true, margin: '-10%' }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 function ScrambleLabel({ children }: { children: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [text, setText] = useState(children);
@@ -132,12 +149,14 @@ function SkillsSection() {
   return (
     <section ref={sectionRef} className="relative py-24">
       <div className="mx-auto max-w-screen-xl px-6 lg:px-12">
-        <div className="mb-10">
-          <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
-            <ScrambleLabel>02 · Skills</ScrambleLabel>
-          </span>
-          <h2 className="mt-3 font-display text-fluid-2xl tracking-tighter">Tools.</h2>
-        </div>
+        <Reveal>
+          <div className="mb-10">
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
+              <ScrambleLabel>02 · Skills</ScrambleLabel>
+            </span>
+            <h2 className="mt-3 font-display text-fluid-2xl tracking-tighter">Tools.</h2>
+          </div>
+        </Reveal>
 
         <div
           className="overflow-hidden rounded-md border border-border bg-[#0d0d0d] p-5 font-mono leading-relaxed"
@@ -204,20 +223,22 @@ function AboutPreview() {
   return (
     <section className="relative py-24" id="about">
       <div className="mx-auto max-w-screen-xl px-6 lg:px-12">
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
-              <ScrambleLabel>01 · About</ScrambleLabel>
-            </span>
-            <h2 className="mt-3 font-display text-fluid-2xl tracking-tighter">
-              Quantitative data science. Tübingen.
-            </h2>
+        <Reveal>
+          <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
+                <ScrambleLabel>01 · About</ScrambleLabel>
+              </span>
+              <h2 className="mt-3 font-display text-fluid-2xl tracking-tighter">
+                Quantitative data science. Tübingen.
+              </h2>
+            </div>
+            <p className="max-w-xs font-mono text-sm text-muted">
+              M.Sc. at Eberhard Karls Universität Tübingen. B.Sc. from DHBW Stuttgart with TRUMPF
+              SE.
+            </p>
           </div>
-          <p className="max-w-xs font-mono text-sm text-muted">
-            M.Sc. at Eberhard Karls Universität Tübingen. B.Sc. from DHBW Stuttgart with TRUMPF
-            SE.
-          </p>
-        </div>
+        </Reveal>
 
         <div className="grid gap-12 md:grid-cols-[1fr_1.3fr] md:gap-16">
           <motion.div
@@ -284,23 +305,25 @@ export default function HomePage() {
       {/* Selected work */}
       <section className="relative py-24">
         <div className="mx-auto max-w-screen-xl px-6 lg:px-12">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
-                <ScrambleLabel>03 · Selected work</ScrambleLabel>
-              </span>
-              <h2 className="mt-3 font-display text-fluid-2xl tracking-tighter">
-                Recent projects.
-              </h2>
+          <Reveal>
+            <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-accent">
+                  <ScrambleLabel>03 · Selected work</ScrambleLabel>
+                </span>
+                <h2 className="mt-3 font-display text-fluid-2xl tracking-tighter">
+                  Recent projects.
+                </h2>
+              </div>
+              <Link
+                href="/projects"
+                className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-accent"
+              >
+                All projects
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
             </div>
-            <Link
-              href="/projects"
-              className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-accent"
-            >
-              All projects
-              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
-          </div>
+          </Reveal>
           <p className="max-w-2xl text-fluid-base text-muted">
             Live from GitHub. Featured:{' '}
             {['orderflow-lab', 'MLES_IMU', 'Continuous-Time-Derivatives-Pricing',
